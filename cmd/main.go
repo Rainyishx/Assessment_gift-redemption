@@ -7,6 +7,8 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"os/signal"
+	"syscall"
 )
 
 // returns the value of the env var key or fallback val if var not set
@@ -51,8 +53,36 @@ func main() {
 	addr := ":" + port
 	log.Printf("Gift Redemption API running on http://localhost%s", addr)
 	log.Printf("Routes:")
-	log.Printf(" GET /health")
-	log.Printf(" POST /redeem")
+	log.Printf("/health")
+	log.Printf("/redeem")
+
+	//cleanup after ending session
+	shutdown := make(chan os.Signal, 1)
+	signal.Notify(shutdown, os.Interrupt, syscall.SIGTERM)
+
+	//start web server in goroutine to prevent ListenAndServe from blocking the rest of the code
+	serverErrors := make(chan error, 1)
+	go func() {
+		serverErrors <- http.ListenAndServe(addr, mux)
+	}()
+
+	//block and wait for server crash or close signal
+	select {
+	case err := <-serverErrors:
+		//if server crashes
+		log.Fatalf("server failed: %v", err)
+	case sig := <-shutdown:
+		//user press ctrl c
+		log.Printf("\nreceived signal: %v", sig)
+		log.Printf("Deleting test data file: %s", redempFile)
+		if err := os.Remove(redempFile); err != nil {
+			//if file doesnt exist
+			log.Printf("could not delete %s: %v", redempFile, err)
+		} else {
+			log.Printf("successfully deleted %s", redempFile)
+		}
+		log.Println("Shutdown complete! byebye :D")
+	}
 
 	//ListenAndServe blocks main thread forvever, waiting for incoming traffic
 	if err := http.ListenAndServe(addr, mux); err != nil {
