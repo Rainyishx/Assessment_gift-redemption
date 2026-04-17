@@ -11,11 +11,12 @@ type StaffRepository interface {
 	FindTeamByStaffPassID(staffPassID string) (string, bool)
 }
 
-// using an in-memory map
+// using an in-memory map, implements StaffRepository interface
 type staffRepository struct {
 	mappings map[string]model.StaffMapping
 }
 
+// intialise repo and load data
 func NewStaffRepository(filePath string) (StaffRepository, error) {
 	f, err := os.Open(filePath)
 	if err != nil {
@@ -31,6 +32,7 @@ func NewStaffRepository(filePath string) (StaffRepository, error) {
 
 	mappings := make(map[string]model.StaffMapping)
 
+	//loading data into map, skipping header row[0]
 	for _, row := range records[1:] {
 		createdAt, _ := strconv.ParseInt(row[2], 10, 64)
 		mappings[row[0]] = model.StaffMapping{
