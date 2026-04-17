@@ -17,7 +17,7 @@ func NewHandler(svc service.RedempService) *Handler {
 // RegisterRoutes attaches all routes to the given ServeMux
 func (h *Handler) RegisterRoutes(mux *http.ServeMux) {
 	mux.HandleFunc("POST /redeem", h.Redeem)
-	mux.HandleFunc("GET /health", h.Health)
+	mux.HandleFunc("GET /Health", h.Health)
 }
 
 type redeemRequest struct {
@@ -94,7 +94,7 @@ func (h *Handler) Redeem(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusCreated, redeemResponse{
 		TeamName:   redemp.TeamName,
 		RedeemedAt: redemp.RedeemedAt,
-		Message:    "Gift redeemed successfully for team" + redemp.TeamName,
+		Message:    "Gift redeemed successfully for team " + redemp.TeamName,
 	})
 
 }
