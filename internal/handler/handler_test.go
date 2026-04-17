@@ -141,7 +141,7 @@ func TestRedeem_InvalidJSON(t *testing.T) {
 // test if server awake
 func TestHealth(t *testing.T) {
 	//create a simple get request to /health
-	req := httptest.NewRequest(http.MethodGet, "/Health", nil)
+	req := httptest.NewRequest(http.MethodGet, "/health", nil)
 	w := httptest.NewRecorder()
 	newTestServer().ServeHTTP(w, req)
 

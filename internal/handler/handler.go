@@ -16,8 +16,8 @@ func NewHandler(svc service.RedempService) *Handler {
 
 // RegisterRoutes attaches all routes to the given ServeMux
 func (h *Handler) RegisterRoutes(mux *http.ServeMux) {
-	mux.HandleFunc("POST /redeem", h.Redeem)
-	mux.HandleFunc("GET /Health", h.Health)
+	mux.HandleFunc("/redeem", h.Redeem)
+	mux.HandleFunc("/health", h.Health)
 }
 
 type redeemRequest struct {
