@@ -7,7 +7,7 @@ import (
 func TestSatffRepo(t *testing.T) {
 	repo, err := NewStaffRepository("../../data/staffmapping.csv")
 	if err != nil {
-		t.Fatal("Failed to initalise repo:", err)
+		t.Fatal("failed to initalise repo:", err)
 	}
 
 	//finding existing staff member
