@@ -1,11 +1,12 @@
 package repository_test
 
 import (
+	"Assessment_gift-redemption/internal/repository"
 	"testing"
 )
 
-func TestSatffRepo(t *testing.T) {
-	repo, err := NewStaffRepository("../../data/staffmapping.csv")
+func TestStaffRepo(t *testing.T) {
+	repo, err := repository.NewStaffRepository("../../data/staffmapping.csv")
 	if err != nil {
 		t.Fatal("failed to initalise repo:", err)
 	}
