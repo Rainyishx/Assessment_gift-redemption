@@ -10,7 +10,7 @@ import (
 // sentinel errors
 var (
 	ErrStaffNotFound   = errors.New("staff pass ID not found")
-	ErrAlreadyRedeemed = errors.New("team ahs already redeemed")
+	ErrAlreadyRedeemed = errors.New("team has already redeemed")
 )
 
 type RedempService interface {
