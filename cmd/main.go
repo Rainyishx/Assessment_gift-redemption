@@ -56,7 +56,7 @@ func main() {
 	log.Printf("/health")
 	log.Printf("/redeem")
 
-	//cleanup after ending session
+	//cleanup after ending session (for easier testing)
 	shutdown := make(chan os.Signal, 1)
 	signal.Notify(shutdown, os.Interrupt, syscall.SIGTERM)
 
