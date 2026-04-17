@@ -1,7 +1,8 @@
-package repository
+package repository_test
 
 import (
 	"Assessment_gift-redemption/internal/model"
+	"Assessment_gift-redemption/internal/repository"
 	"os"
 	"sync"
 	"testing"
@@ -25,7 +26,7 @@ func TestRedempRepo(t *testing.T) {
 	defer os.Remove(tempPath)
 
 	//testing file not found
-	repo, err := NewRedempRepo(tempPath)
+	repo, err := repository.NewRedempRepo(tempPath)
 	if err != nil {
 		t.Fatal("failed to initialise repo", err)
 	}
@@ -52,7 +53,7 @@ func TestRedempRepo(t *testing.T) {
 	}
 
 	//initialise new repo to test writing to csv succeeded
-	repo2, err := NewRedempRepo(tempPath)
+	repo2, err := repository.NewRedempRepo(tempPath)
 	if err != nil {
 		t.Fatal("failed to initialise second repo", err)
 	}
@@ -65,7 +66,7 @@ func TestRedempRepo_Concurrency(t *testing.T) {
 	tempPath := getTempFilePath(t)
 	defer os.Remove(tempPath)
 
-	repo, err := NewRedempRepo(tempPath)
+	repo, err := repository.NewRedempRepo(tempPath)
 	if err != nil {
 		t.Fatal("failed to initialise repo", err)
 	}
