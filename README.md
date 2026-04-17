@@ -241,3 +241,9 @@ via `Ctrl+C` locally or a `docker stop` in a containerised environment. This fun
 
 ### Environment configuration
 - File paths and port are configurable via environment variables with sensible defaults, making the app easy to run in both local and containerised environments.
+
+
+---
+
+## Administrative Note: Commit History
+Due to a local Git CLI misconfiguration related to a university email address, early commits in this repository appear under the GitHub handle `rainyishz`. The CLI was reconfigured mid-development, and subsequent commits reflect my primary handle `Rainyishx`. All code was authored locally by me, and I can provide local Git logs to substantiate this if required.
