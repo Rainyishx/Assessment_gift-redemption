@@ -143,15 +143,15 @@ Attempt to redeem a gift using a staff pass ID.
 
 **Request body:**
 ```json
-{ "staff_pass_id": "STAFF_P001" }
+{ "staff_pass_id": "STAFF_001" }
 ```
 
 **Success `201`:**
 ```json
 {
-  "team_name": "TEAM_APPLE",
+  "team_name": "TEAM_A",
   "redeemed_at": 1700000000000,
-  "message": "Gift redeemed successfully for team TEAM_APPLE"
+  "message": "Gift redeemed successfully for team TEAM_A"
 }
 ```
 
@@ -166,7 +166,7 @@ Attempt to redeem a gift using a staff pass ID.
 
 **Error body example:**
 ```json
-{ "error": "team has already redeemed their gift" }
+{ "error": "TEAM_A has already redeemed their gift" }
 ```
 
 ---
